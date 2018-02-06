@@ -1,0 +1,187 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+using namespace std;
+#define PI 3.14
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int IsPowerN(int K, int N);
+int IsPrime(int N);
+int DigitN(int K, int N);
+int numdigits(int K);
+double DegToRad(double D);
+double RadToDeg(double R);
+double Fact(int N);
+
+int main(int argc, char** argv) {
+	int task_num;
+	cout << "Vvedite nomer zadaniya: " << endl;
+	cin >> task_num;
+    
+	if(task_num == 1)
+	{
+		int i;
+	    int N,K;
+	    int count = 0;
+	
+	    cout << "Vvedite celoe chislo N>1:" << endl;
+	    cin >> N;
+	
+	    for(i=0;i<10;i++)
+	    {
+		    cout << "vvedite celoe polozhitel'noe chislo: " << endl;
+		    cin >> K;
+		    if(IsPowerN(K,N))
+		        count++;		
+	    }
+	    cout << "Kolichestvo stepenei chisla " << N << " ravno: " << count << endl;
+	}
+	else if (task_num == 2)
+	{
+		int N;
+	    int i;	
+	    int count=0;
+	
+	
+	
+    	for(i=0;i<10;i++)
+	    {
+		    cout << "Vvedite chislo:"<< endl;
+		    cin >> N;
+		    if(IsPrime(N)){
+			    cout << "Chislo prostoe." << endl;
+			    count++;
+		    }			
+	    }
+	    cout << "Kolichestvo prostyh chisel ravno: " << count << endl;
+	}
+	else if (task_num == 3)
+	{
+		int i;
+	    int N=0;
+	    int K=0;
+	
+	    for(i=0;i<5;i++)
+	    {
+		    cout << "Vvedite K:" << endl;
+		    cin >> K;
+		    cout << "Vvedite N (ot 1 do 5): " << endl;
+		    cin >> N;
+		    cout << "V pozicii " << N << " chisla " << K << " nahoditsya cifra " << DigitN(K,N) << endl;
+	    }   
+	}
+	else if (task_num == 4)
+	{
+		int i;
+	    double D,R;
+	
+	    for(i=0;i<5;i++)
+	    {
+		    cout << "Vvedite ugol v gradusah (ot 0 do 360): " << endl;
+		    cin >> D;
+		    cout << "Ugol v radianah: " << DegToRad (D) << endl;
+	    }
+	}
+	else if (task_num == 5)
+	{
+		int i;
+	    double R;
+	
+	    for(i=0;i<5;i++)
+	    {
+		    cout << "Vvedite ugol v radianah (ot 0 do 2*3.14): " << endl;
+		    cin >> R;
+		    cout << "Ugol v gradusah: " << RadToDeg (R) << endl;
+	    }
+	}
+	else if (task_num == 6)
+	{
+		int i;
+	    int N;
+	
+	    for(i=0;i<5;i++)
+	    {
+		    cout << "Vvedite celoe chislo N>0: " << endl;
+		    cin >> N;
+		    cout << "Factorial chisla: " << Fact(N) << endl;
+	    }
+	}
+	return 0;
+}
+
+
+int IsPowerN(int K, int N)
+{
+	while(K%N==0)
+	{
+		K/=N;
+	}
+	return (K==1);	
+}
+
+int IsPrime(int N)
+{
+    for (int i = 2; i < N; i++)
+    {
+        if (N % i == 0 && i != N)
+            return 0;
+    }
+    return 1;
+}
+
+int DigitN(int K, int N)
+{
+	int r, t1, t2;
+	
+	if (numdigits(K)<N)
+	    return (-1);
+	    
+	t1=pow(10,N);
+	r=K%t1;
+	
+	if(N>0)
+	{
+		t2=pow(10,N-1);
+		r=r/t2;
+		return r;
+	}	    
+}
+
+int numdigits(int K)
+{
+    int count = 0;
+	do
+	{
+        ++count;
+        K /= 10;
+	}while(K != 0);
+    return count;
+}
+
+double DegToRad(double D)
+{
+	double R;
+	R=(D*PI)/180;
+	return R;
+}
+
+double RadToDeg(double R)
+{
+	double D;
+	D=(R*180)/PI;
+	return D;
+}
+
+double Fact(int N)
+{
+	int i;
+	unsigned long long Fact=1;
+	for(i=1;i<=N;i++)
+	{
+		Fact*=i;
+	}
+	return Fact;
+}
